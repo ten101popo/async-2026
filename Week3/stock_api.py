@@ -1,5 +1,7 @@
 # mock_stock_api.py
+
 # สคริปต์จำลองเว็บเซิร์ฟเวอร์ราคาหุ้นด้วย FastAPI สำหรับรองรับ Assignment 3
+
 from fastapi import FastAPI
 import asyncio
 
@@ -9,7 +11,7 @@ app = FastAPI(title="Asyncio Week 3 Mock Stock API")
 async def get_stock_price(server_name: str):
     """ API จำลองราคาหุ้น โดยแต่ละสาขาจะมีความหน่วง (Latency) ไม่เท่ากัน """
     name_lower = server_name.lower()
-    
+
     # แยกความหน่วงเวลาจำลองตามชื่อสาขาที่ส่งเข้ามาดึงข้อมูล
     if name_lower == "alpha":
         await asyncio.sleep(3.0)  # ช้าที่สุด (หน่วงเวลา 3.0 วินาที)
@@ -29,6 +31,3 @@ async def get_stock_price(server_name: str):
         "price_usd": price,
         "status": "success"
     }
-
-# ไลบรารีที่จำเป็น: pip install fastapi uvicorn httpx
-# คำสั่งใช้รันเซิร์ฟเวอร์: uvicorn stock_api:app --reload --port 8088
